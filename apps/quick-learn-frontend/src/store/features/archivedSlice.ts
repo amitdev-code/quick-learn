@@ -136,7 +136,7 @@ export const fetchArchivedLessons = createAsyncThunk(
     search: string;
     resetList?: boolean;
   }) => {
-    const response = await archivedService.getArchivedLessons(page, search);
+    const response = await archivedService.FETCH_ARCHIVE_LESSONS(page, search);
     return { data: response.data, resetList };
   },
 );

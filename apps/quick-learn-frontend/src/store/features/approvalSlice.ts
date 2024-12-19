@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TLesson } from '@src/shared/types/contentRepository';
 import {
   getUnapprovedLessons,
-  approveLesson,
+  APPROVED_LESSON,
 } from '@src/apiServices/lessonsService';
 import { showApiErrorInToast } from '@src/utils/toastUtils';
 import { AxiosErrorObject } from '@src/apiServices/axios';
@@ -34,9 +34,9 @@ export const fetchUnapprovedLessons = createAsyncThunk(
 );
 
 export const approveLessonThunk = createAsyncThunk(
-  'approval/approveLesson',
+  'approval/APPROVED_LESSON',
   async (id: string) => {
-    await approveLesson(id).catch((error: AxiosErrorObject) => {
+    await APPROVED_LESSON(id).catch((error: AxiosErrorObject) => {
       showApiErrorInToast(error);
       throw error;
     });

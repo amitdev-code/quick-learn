@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
-import { getCommunityCourse } from '@src/apiServices/contentRepositoryService';
+import { FETCH_COMMUNITY_COURSE } from '@src/apiServices/contentRepositoryService';
 import { TCourse } from '@src/shared/types/contentRepository';
 import { format } from 'date-fns';
 import { DateFormats } from '@src/constants/dateFormats';
@@ -20,7 +20,7 @@ const CommunityCourse = () => {
 
   const getCourseDetails = useCallback(() => {
     if (!courseId) return;
-    getCommunityCourse(courseId)
+    FETCH_COMMUNITY_COURSE(courseId)
       .then((res) => {
         setCourseData(res.data);
       })

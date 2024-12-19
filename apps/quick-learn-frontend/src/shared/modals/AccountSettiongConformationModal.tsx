@@ -39,7 +39,7 @@ export default function AccountSettingConformationModal({
             className="py-2.5 px-5 ml-4 my-3.5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 uppercase"
             onClick={() => setOpen(false)}
           >
-            {en.common.ok}
+            {en.common.OK}
           </button>
         </div>
       </Modal.Body>

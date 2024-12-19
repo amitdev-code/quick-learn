@@ -66,7 +66,7 @@ export const createRoadmap = async (
   return response.data;
 };
 
-export const updateRoadmap = async (
+export const UPDATE_ROADMAP = async (
   id: string,
   data: TCreateRoadmap,
 ): Promise<AxiosSuccessResponse> => {
@@ -133,7 +133,7 @@ export const assignRoadmapsToCourse = async (
   return response.data;
 };
 
-export const createLesson = async (payload: {
+export const CREATE_LESSONS = async (payload: {
   name: string;
   content: string;
   course_id: string;
@@ -152,7 +152,7 @@ export const getCommunityCourses = async () => {
   return response.data;
 };
 
-export const getCommunityCourse = async (
+export const FETCH_COMMUNITY_COURSE = async (
   id: string,
 ): Promise<AxiosSuccessResponse<TCourse>> => {
   const response = await axiosInstance.get<AxiosSuccessResponse<TCourse>>(

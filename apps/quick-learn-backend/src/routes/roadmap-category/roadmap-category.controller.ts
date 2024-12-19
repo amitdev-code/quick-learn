@@ -98,13 +98,13 @@ export class RoadmapCategoryController {
       +id,
       updateRoadmapCategoryDto,
     );
-    return new SuccessResponse(en.successUpdateRoadmap);
+    return new SuccessResponse(en.SUCCESSFULLY_UPDATED_ROADMAP);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete the roadmap category.' })
   async remove(@Param('id') id: string) {
     await this.roadmapCategoryService.deleteRoadmapCategory(+id);
-    return new SuccessResponse(en.successDeleteRoadmap);
+    return new SuccessResponse(en.SUCCESSFULLY_DELETED_ROADMAP);
   }
 }

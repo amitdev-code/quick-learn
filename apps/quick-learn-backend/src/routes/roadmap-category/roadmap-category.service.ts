@@ -49,7 +49,7 @@ export class RoadmapCategoryService extends BasicCrudService<RoadmapCategoryEnti
   async deleteRoadmapCategory(id: number): Promise<void> {
     const roadmapCategory = await this.get({ id }, ['roadmaps']);
     if (roadmapCategory.roadmaps.length > 0) {
-      throw new BadRequestException(en.roadmapCategriesHasData);
+      throw new BadRequestException(en.ROADMAP_CATEGORY_HAS_DATA);
     }
 
     await this.repository.delete({ id });

@@ -70,13 +70,13 @@ export class CourseCategoryController {
       +id,
       updateCourseCategoryDto,
     );
-    return new SuccessResponse(en.successUpdateCourse);
+    return new SuccessResponse(en.SUCCESSULLY_UPDATE_COURSE);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete the course category.' })
   async remove(@Param('id') id: string) {
     await this.courseCategoryService.deleteCourseCategory(+id);
-    return new SuccessResponse(en.successDeleteCourse);
+    return new SuccessResponse(en.SUCCESSULLY_DELETE_COURSE);
   }
 }

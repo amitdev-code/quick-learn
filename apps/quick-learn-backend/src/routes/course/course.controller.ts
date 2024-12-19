@@ -41,7 +41,7 @@ export class CourseController {
       { is_community_available: true, archived: false },
       [],
     );
-    return new SuccessResponse(en.GetAllCourses, data);
+    return new SuccessResponse(en.FETCH_ALL_COURSES, data);
   }
 
   @Get('/my-courses')
@@ -49,10 +49,10 @@ export class CourseController {
   async getMyCourses(@CurrentUser() user: UserEntity) {
     // CHECK IF USER IS LOGGED IN
     if (!user.id) {
-      throw new BadRequestException(en.userNotFound);
+      throw new BadRequestException(en.USER_NOT_FOUND);
     }
     const data = await this.service.getUserAssignedRoadmapCourses(user.id);
-    return new SuccessResponse(en.GetAllCourses, data);
+    return new SuccessResponse(en.FETCH_ALL_COURSES, data);
   }
 
   @Get('/community-course')
@@ -62,7 +62,7 @@ export class CourseController {
       { is_community_available: true, archived: false },
       ['created_by'],
     );
-    return new SuccessResponse(en.getCommunityCourse, data);
+    return new SuccessResponse(en.FETCH_COMMUNITY_COURSE, data);
   }
 
   @Post()
@@ -72,7 +72,7 @@ export class CourseController {
     @CurrentUser() user: UserEntity,
   ) {
     const data = await this.service.createCourse(user, createCourseDto);
-    return new SuccessResponse(en.CreateCourse, data);
+    return new SuccessResponse(en.CREATE_COURSE, data);
   }
 
   @Get(':id')
@@ -83,7 +83,7 @@ export class CourseController {
       'lessons',
       'lessons.created_by_user',
     ]);
-    return new SuccessResponse(en.GetCourseDetails, data);
+    return new SuccessResponse(en.FETCH_ALL_COURSES_DETAILS, data);
   }
 
   @Get('/community/:id')
@@ -97,18 +97,18 @@ export class CourseController {
       },
       ['lessons', 'lessons.created_by_user'],
     );
-    return new SuccessResponse(en.GetCourseDetails, data);
+    return new SuccessResponse(en.FETCH_ALL_COURSES_DETAILS, data);
   }
 
   @Patch(':id')
   @ApiParam({ name: 'id', description: 'course id', required: true })
   @ApiOperation({ summary: 'Update a course' })
-  async updateRoadmap(
+  async UPDATE_ROADMAP(
     @Param('id') id: string,
     @Body() updateCourseDto: UpdateCourseDto,
   ) {
     await this.service.updateCourse(+id, updateCourseDto);
-    return new SuccessResponse(en.UpdateCourse);
+    return new SuccessResponse(en.UPDATE_COURSE);
   }
 
   @Patch(':id/assign')
@@ -119,7 +119,7 @@ export class CourseController {
     @Body() assignRoadmapsToCourseDto: AssignRoadmapsToCourseDto,
   ) {
     await this.service.assignRoadmapCourse(+id, assignRoadmapsToCourseDto);
-    return new SuccessResponse(en.UpdateCourse);
+    return new SuccessResponse(en.UPDATE_COURSE);
   }
 
   @Post('archived')
@@ -131,7 +131,7 @@ export class CourseController {
       'updated_by',
       'course_category',
     ]);
-    return new SuccessResponse(en.successGotArchivedCourses, courses);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCH_ARCHIVED_COURSES, courses);
   }
 
   @Post('activate')
@@ -146,7 +146,7 @@ export class CourseController {
       currentUser,
     );
     return new SuccessResponse(
-      body.active ? en.unarchiveCourse : en.archiveCourse,
+      body.active ? en.SUCCESSFULLY_UNARCHIVED_COURSE : en.ARCHIVE_COURSE,
     );
   }
 
@@ -155,6 +155,6 @@ export class CourseController {
   @ApiOperation({ summary: 'Delete a course permanently' })
   async deleteCourse(@Param('id') id: string): Promise<SuccessResponse> {
     await this.service.deleteCourse(+id);
-    return new SuccessResponse(en.CourseDeleted);
+    return new SuccessResponse(en.COURSE_DELETED);
   }
 }

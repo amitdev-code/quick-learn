@@ -71,7 +71,7 @@ export class UsersService extends PaginationService<UserEntity> {
     });
 
     if (!skill) {
-      throw new BadRequestException(en.invalidSkill);
+      throw new BadRequestException(en.INVALID_SKILL);
     }
 
     if (foundUser && foundUser.active) {
@@ -79,7 +79,7 @@ export class UsersService extends PaginationService<UserEntity> {
     }
 
     if (foundUser && !foundUser.active) {
-      throw new BadRequestException(en.deactiveUserAddError);
+      throw new BadRequestException(en.DEACTIVATED_USER_ADD);
     }
 
     let user = this.userRepository.create(createUserDto);
@@ -202,7 +202,7 @@ export class UsersService extends PaginationService<UserEntity> {
     const roadmap = await this.roadmapService.getUserRoadmapDetails(userId, id);
 
     if (!roadmap) {
-      throw new BadRequestException(en.RoadmapNotFound);
+      throw new BadRequestException(en.ROADMAP_NOT_FOUND);
     }
 
     if (roadmap.courses) {
@@ -227,7 +227,7 @@ export class UsersService extends PaginationService<UserEntity> {
     );
 
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     return course;
@@ -247,7 +247,7 @@ export class UsersService extends PaginationService<UserEntity> {
     );
 
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
 
     return lesson;
@@ -414,7 +414,7 @@ export class UsersService extends PaginationService<UserEntity> {
     const user = await this.findOne({ id: userId });
 
     if (!user) {
-      throw new BadRequestException(en.userNotFound);
+      throw new BadRequestException(en.USER_NOT_FOUND);
     }
 
     // ON PROFILE CHANGE VERIFY IF LOGO HAS CHANGED AND PERVIOUS IMAGE IS NOT EMPTY STRING
@@ -452,7 +452,7 @@ export class UsersService extends PaginationService<UserEntity> {
     const user = await this.findOne({ id: userId });
 
     if (!user) {
-      throw new BadRequestException(en.userNotFound);
+      throw new BadRequestException(en.USER_NOT_FOUND);
     }
 
     // Find the roadmaps using the provided IDs
@@ -462,7 +462,7 @@ export class UsersService extends PaginationService<UserEntity> {
 
     // Check if the number of roadmaps matches the provided IDs
     if (roadmaps.length !== assignRoadmapsToUserDto.roadmaps.length) {
-      throw new BadRequestException(en.invalidRoadmaps);
+      throw new BadRequestException(en.INVALID_ROADMAPS);
     }
 
     // Assign roadmaps to the user and save
@@ -473,7 +473,7 @@ export class UsersService extends PaginationService<UserEntity> {
     const user = await this.findOne(condition);
 
     if (!user) {
-      throw new BadRequestException(en.userNotFound);
+      throw new BadRequestException(en.USER_NOT_FOUND);
     }
 
     // Delete associated sessions first

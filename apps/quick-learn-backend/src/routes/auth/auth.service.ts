@@ -46,7 +46,7 @@ export class AuthService {
     }
 
     if (!user.active) {
-      throw new ForbiddenException(en.accountDeactiveMessage);
+      throw new ForbiddenException(en.ACCOUNT_DEACTIVATE);
     }
 
     // Comparing password
@@ -179,7 +179,7 @@ export class AuthService {
     // VALIDATE IF NEW PASSWORD IS SAME AS OLD PASSWORD
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
     if (isSamePassword) {
-      throw new BadRequestException(en.usingsamePassword);
+      throw new BadRequestException(en.SAME_PASSWORD_AS_OLD);
     }
 
     // TODO: delete expired tokens using cronjobs

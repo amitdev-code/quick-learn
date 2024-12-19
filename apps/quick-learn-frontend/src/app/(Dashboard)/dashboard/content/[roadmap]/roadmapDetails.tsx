@@ -9,7 +9,7 @@ import {
   assignCoursesToRoadmap,
   createCourse,
   getRoadmap,
-  updateRoadmap,
+  UPDATE_ROADMAP,
 } from '@src/apiServices/contentRepositoryService';
 import { DateFormats } from '@src/constants/dateFormats';
 import { en } from '@src/constants/lang/en';
@@ -33,7 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContentRepositoryMetadata } from '@src/store/features/metadataSlice';
 import {
   selectRoadmapById,
-  updateRoadmap as updateStoreRoadmap,
+  UPDATE_ROADMAP as updateStoreRoadmap,
 } from '@src/store/features/roadmapsSlice';
 import { AppDispatch, RootState } from '@src/store/store';
 import {
@@ -140,7 +140,7 @@ const RoadmapDetails = () => {
   const onEdit = async (data: TCreateRoadmap) => {
     setIsLoading(true);
     try {
-      const res = await updateRoadmap(roadmapId, data);
+      const res = await UPDATE_ROADMAP(roadmapId, data);
       setOpenAddModal(false);
       if (!roadmapData) return;
       const updatedRoadmap = { ...roadmapData, ...data };
@@ -337,7 +337,7 @@ const RoadmapDetails = () => {
               </button>
             </Tooltip>
 
-            <Tooltip content={en.contentRepository.archiveRoadmap}>
+            <Tooltip content={en.contentRepository.ARCHIVE_ROADMAP}>
               <button
                 type="button"
                 className="text-black bg-gray-300 hover:bg-red-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"

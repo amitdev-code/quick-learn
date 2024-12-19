@@ -121,7 +121,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
       .getOne();
 
     if (existingRoadmap) {
-      throw new BadRequestException(en.RoadmapAlreadyExists);
+      throw new BadRequestException(en.ROADMAP_ALREADY_EXIST);
     }
 
     // Verify roadmap category exists
@@ -130,7 +130,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
     });
 
     if (!roadmapCategory) {
-      throw new BadRequestException(en.InvalidRoadmapCategory);
+      throw new BadRequestException(en.INVALID_ROADMAP_CATEGORY);
     }
 
     const newRoadmap = this.roadmapRepository.create({
@@ -142,7 +142,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
     return await this.roadmapRepository.save(newRoadmap);
   }
 
-  async updateRoadmap(
+  async UPDATE_ROADMAP(
     id: number,
     updateRoadmapDto: UpdateRoadmapDto,
     userID: number,
@@ -154,7 +154,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
       .getOne();
 
     if (!roadmap) {
-      throw new BadRequestException(en.RoadmapNotFound);
+      throw new BadRequestException(en.ROADMAP_NOT_FOUND);
     }
 
     // Handle active status update
@@ -183,7 +183,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
         .getOne();
 
       if (existingRoadmap) {
-        throw new BadRequestException(en.RoadmapAlreadyExists);
+        throw new BadRequestException(en.ROADMAP_ALREADY_EXIST);
       }
     }
 
@@ -193,7 +193,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
         id: +updateRoadmapDto.roadmap_category_id,
       });
       if (!roadmapCategory) {
-        throw new BadRequestException(en.InvalidRoadmapCategory);
+        throw new BadRequestException(en.INVALID_ROADMAP_CATEGORY);
       }
     }
 
@@ -221,10 +221,10 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
       .getOne();
   }
 
-  async archiveRoadmap(id: number): Promise<void> {
+  async ARCHIVE_ROADMAP(id: number): Promise<void> {
     const roadmap = await this.getRoadmapById(id);
     if (!roadmap) {
-      throw new BadRequestException(en.RoadmapNotFound);
+      throw new BadRequestException(en.ROADMAP_NOT_FOUND);
     }
     await this.roadmapRepository.update({ id }, { archived: true });
   }
@@ -265,7 +265,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
     const roadmap = await queryBuilder.getOne();
 
     if (!roadmap) {
-      throw new BadRequestException(en.RoadmapNotFound);
+      throw new BadRequestException(en.ROADMAP_NOT_FOUND);
     }
 
     return roadmap;
@@ -277,7 +277,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
   ): Promise<void> {
     const roadmap = await this.getRoadmapById(id);
     if (!roadmap) {
-      throw new BadRequestException(en.RoadmapNotFound);
+      throw new BadRequestException(en.ROADMAP_NOT_FOUND);
     }
 
     const courses = await this.courseService.getMany({
@@ -285,7 +285,7 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
     });
 
     if (courses.length !== assignCourses.courses.length) {
-      throw new BadRequestException(en.invalidCourses);
+      throw new BadRequestException(en.INVALID_COURSES);
     }
 
     roadmap.courses = courses;
@@ -326,12 +326,12 @@ export class RoadmapService extends PaginationService<RoadmapEntity> {
     try {
       const id = this.getIdFromCondition(condition);
       if (!id) {
-        throw new BadRequestException(en.invalidDeleteCondition);
+        throw new BadRequestException(en.INVALID_DELETE_CONDITION);
       }
 
       const roadmap = await this.getRoadmapById(id);
       if (!roadmap) {
-        throw new BadRequestException(en.RoadmapNotFound);
+        throw new BadRequestException(en.ROADMAP_NOT_FOUND);
       }
 
       // Remove roadmap-course associations

@@ -83,7 +83,7 @@ function MemberForm<T extends z.ZodTypeAny>({
   return (
     <section className="mx-auto max-w-2xl">
       <h1 className="text-lg font-semibold">
-        {isAddMember ? en.common.add : en.common.edit} {en.teams.teamMember}
+        {isAddMember ? en.common.ADD_NEW : en.common.EDIT} {en.teams.teamMember}
       </h1>
       <p className="text-gray-600 text-sm">
         {isAddMember ? en.teams.fillDetailsOfNew : en.teams.updateDetails}
@@ -132,7 +132,7 @@ function MemberForm<T extends z.ZodTypeAny>({
                           className="appearance-none block bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 capitalize"
                         >
                           <option value="" disabled hidden>
-                            {en.common.select}
+                            {en.common.SELECT}
                           </option>
                           {options?.map((option) => (
                             <option
@@ -215,7 +215,7 @@ function MemberForm<T extends z.ZodTypeAny>({
           disabled={loading}
           onClick={cancel}
         >
-          {en.common.cancel}
+          {en.common.CANCEL}
         </button>
       </form>
     </section>

@@ -70,7 +70,7 @@ export class CourseCategoryService extends BasicCrudService<CourseCategoryEntity
   async deleteCourseCategory(id: number): Promise<void> {
     const courseCategory = await this.get({ id }, ['courses']);
     if (courseCategory.courses.length > 0) {
-      throw new BadRequestException(en.courseCategriesHasData);
+      throw new BadRequestException(en.COURSE_CATEGORY_HAS_DATA);
     }
     await this.repository.delete({ id });
   }

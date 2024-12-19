@@ -133,7 +133,7 @@ function FormFieldsMapper<T extends z.ZodTypeAny>({
               type="button"
               disabled={isLoading}
             >
-              {en.common.cancel}
+              {en.common.CANCEL}
             </button>
           )}
         </div>

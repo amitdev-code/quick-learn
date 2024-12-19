@@ -17,7 +17,7 @@ const NavbarSearchBox: React.FC<NavbarSearchBoxProps> = ({ isMember }) => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<SearchedQuery>({
+  const [SEARCH_RESULTS, setSearchResults] = useState<SearchedQuery>({
     Roadmaps: [],
     Courses: [],
     Lessons: [],
@@ -72,13 +72,13 @@ const NavbarSearchBox: React.FC<NavbarSearchBoxProps> = ({ isMember }) => {
   // Check if there are any results across all categories
   const hasNoResults =
     searchQuery.length >= MINIMUM_SEARCH_LENGTH &&
-    SEARCH_CATEGORIES.every((category) => searchResults[category].length === 0);
+    SEARCH_CATEGORIES.every((category) => SEARCH_RESULTS[category].length === 0);
 
   // Render search results for a specific category
   const renderCategoryResults = (
     category: (typeof SEARCH_CATEGORIES)[number],
   ) => {
-    const items = searchResults[category];
+    const items = SEARCH_RESULTS[category];
 
     if (items.length === 0) return null;
 

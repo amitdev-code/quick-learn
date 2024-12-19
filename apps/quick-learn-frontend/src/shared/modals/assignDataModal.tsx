@@ -261,14 +261,14 @@ const AssignDataModal: FC<Props> = ({
               className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-gray-500"
               disabled={!isFormDirty || !isValid || isLoading}
             >
-              {isLoading ? <Loader /> : en.common.save}
+              {isLoading ? <Loader /> : en.common.SAVE}
             </button>
             <button
               onClick={() => setShow(false)}
               disabled={isLoading}
               className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
             >
-              {en.common.cancel}
+              {en.common.CANCEL}
             </button>
           </div>
         </form>

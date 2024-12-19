@@ -55,7 +55,7 @@ export class SkillsController {
     @Body() updateSkillDto: UpdateSkillDto,
   ) {
     await this.skillsService.updateSkill(+id, updateSkillDto);
-    return new SuccessResponse(en.successSkillUpdate);
+    return new SuccessResponse(en.SUCCESSFULLY_UPDATED_SKILL);
   }
 
   @Delete(':id')
@@ -63,6 +63,6 @@ export class SkillsController {
   @ApiOperation({ summary: 'Delete skill by id' })
   async remove(@Param('id') id: string) {
     await this.skillsService.deleteSkill(+id);
-    return new SuccessResponse(en.successSkillDelete);
+    return new SuccessResponse(en.SUCCESSFULLY_DELETED_SKILL);
   }
 }

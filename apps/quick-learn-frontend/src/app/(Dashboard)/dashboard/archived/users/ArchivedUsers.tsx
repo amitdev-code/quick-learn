@@ -46,7 +46,7 @@ const InactiveUsers = () => {
         dispatch(
           fetchArchivedUsers({ page: 1, search: searchValue, resetList: true }),
         );
-        toast.success(en.successUserDelete);
+        toast.success(en.SUCCESSFULLY_USER_DELETED);
       } catch (error) {
         toast.error(en.errorDeletingUser);
       } finally {

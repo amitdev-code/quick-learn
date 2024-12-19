@@ -157,7 +157,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!courseCategory) {
-      throw new BadRequestException(en.InvalidCourseCategory);
+      throw new BadRequestException(en.INVALID_COURSE_CATEGORY);
     }
 
     const roadmap = await this.roadmapService.get({
@@ -165,13 +165,13 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!roadmap) {
-      throw new BadRequestException(en.InvalidRoadmap);
+      throw new BadRequestException(en.INVALID_ROADMAP);
     }
 
     const course = await this.get({ name: ILike(createCourseDto.name) });
 
     if (course) {
-      throw new BadRequestException(en.courseAlreadyExists);
+      throw new BadRequestException(en.COURSE_ALREADY_EXIST);
     }
 
     return await this.create({
@@ -204,7 +204,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!course) {
-      throw new BadRequestException(en.invalidCourse);
+      throw new BadRequestException(en.INVALID_COURSE);
     }
 
     if (!course.lessons) {
@@ -263,7 +263,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!course) {
-      throw new BadRequestException(en.invalidCourse);
+      throw new BadRequestException(en.INVALID_COURSE);
     }
 
     let imageToDelete = [];
@@ -293,11 +293,11 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     }
 
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     if (courseByname && courseByname.id !== course.id) {
-      throw new BadRequestException(en.courseAlreadyExists);
+      throw new BadRequestException(en.COURSE_ALREADY_EXIST);
     }
 
     if (updateCourseDto?.course_category_id) {
@@ -305,7 +305,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
         id: +updateCourseDto.course_category_id,
       });
       if (!courseCategory) {
-        throw new BadRequestException(en.InvalidCourseCategory);
+        throw new BadRequestException(en.INVALID_COURSE_CATEGORY);
       }
     }
 
@@ -325,7 +325,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
   ): Promise<void> {
     const course = await this.get({ id });
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     const roadmaps = await this.roadmapService.getMany({
@@ -333,7 +333,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (roadmaps.length !== assignRoadmapsToCourseDto.roadmaps.length) {
-      throw new BadRequestException(en.invalidRoadmaps);
+      throw new BadRequestException(en.INVALID_ROADMAPS);
     }
 
     await this.repository.save({ ...course, roadmaps });
@@ -354,7 +354,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     await this.update(
@@ -369,7 +369,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
   /**
    * Archives a course
    */
-  async archiveCourse(id: number, currentUser: UserEntity): Promise<void> {
+  async ARCHIVE_COURSE(id: number, currentUser: UserEntity): Promise<void> {
     // For archiving, we don't need lessons
     const course = await this.repository.findOne({
       where: { id },
@@ -377,7 +377,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     });
 
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     await this.update(
@@ -441,7 +441,7 @@ export class CourseService extends BasicCrudService<CourseEntity> {
     const course = await this.getCourseDetails({ id }, []); // Get course without lessons to verify existence
 
     if (!course) {
-      throw new BadRequestException(en.CourseNotFound);
+      throw new BadRequestException(en.COURSE_NOT_FOUND);
     }
 
     const imageUsed = await this.getImagesUsedInLessonsRelatedCource({ id }, [

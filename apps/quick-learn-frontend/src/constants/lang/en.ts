@@ -8,23 +8,23 @@ export const en = {
    */
   common: {
     // Actions
-    save: 'Save',
-    saveAndPublish: 'Save & Publish',
-    cancel: 'Cancel',
-    ok: 'ok',
-    yes: 'Yes',
-    no: 'No',
-    activate: 'Activate',
-    restore: 'Restore',
-    delete: 'Delete',
-    deactivatedOn: 'Deactivated on',
-    by: 'by',
-    Archive: 'Archive',
-    edit: 'Edit',
-    action: 'Action',
-    select: 'Select',
-    quickLearn: 'Quick Learn',
-    add: 'Add New',
+    SAVE: 'Save',
+    SAVE_AND_PUBLISH: 'Save & Publish',
+    CANCEL: 'Cancel',
+    OK: 'ok',
+    YES: 'Yes',
+    NO: 'No',
+    ACTIVATE: 'Activate',
+    RESTORE: 'Restore',
+    DELETE: 'Delete',
+    DEACTIVATED_ON: 'Deactivated on',
+    BY: 'by',
+    ARCHIVE: 'Archive',
+    EDIT: 'Edit',
+    ACTION: 'Action',
+    SELECT: 'Select',
+    QUICK_LEARN: 'Quick Learn',
+    ADD_NEW: 'Add New',
 
     //dashboard
     loading: 'Loading...',
@@ -103,7 +103,7 @@ export const en = {
     createNewRoadmap: 'Create New Roadmap',
     editRoadmap: 'Edit Roadmap',
     createdThisRoadmapOn: 'created this roadmap on',
-    archiveRoadmap: 'Archive Roadmap',
+    ARCHIVE_ROADMAP: 'Archive Roadmap',
     noRoadmaps: 'No roadmaps available',
     noRoadmapsDescription: 'There are no roadmaps yet',
     noCourses: 'No courses available',
@@ -115,7 +115,7 @@ export const en = {
     editCourse: 'Edit Course',
     addOnAlreadyExistingCourse: 'Add already existing courses to this roadmap',
     assignToRoadmap: 'Move or add this course to another Roadmap',
-    archiveCourse: 'Archive Course',
+    ARCHIVE_COURSE: 'Archive Course',
   },
 
   /**
@@ -246,21 +246,21 @@ export const en = {
   },
 
   // Success messages
-  successUserStatusUpdate: 'User status has been updated successfully',
-  successUserDelete: 'User has been permanently deleted',
-  successGotUsers: 'Users retrieved successfully',
-  successGotUser: 'User retrieved successfully',
-  successUserMetadata: 'User metadata retrieved successfully',
-  successUserCreate: 'User created successfully',
-  successUserUpdate: 'User updated successfully',
+  SUCCESSFULLY_UPDATED_USER_STATUS: 'User status has been updated successfully',
+  SUCCESSFULLY_USER_DELETED: 'User has been permanently deleted',
+  SUCCESSFULLY_GOT_USER: 'Users retrieved successfully',
+  SUCCESSFULLY_GOT_USER_DETAILS: 'User retrieved successfully',
+  SUCCESSFULLY_FETCHED_USER_METADATA: 'User metadata retrieved successfully',
+  SUCCESSFULLY_USER_CREATED: 'User created successfully',
+  SUCCESSFULLY_USER_UPDATED: 'User updated successfully',
   successUserActivate: 'User has been activated successfully',
 
   // Error messages
   errorDeletingUser: 'Failed to delete user',
   errorActivatingUser: 'Failed to activate user',
-  invalidSkill: 'Invalid skill selected',
-  deactiveUserAddError: 'This email is associated with an inactive user',
-  userNotFound: 'User not found',
+  INVALID_SKILL: 'Invalid skill selected',
+  DEACTIVATED_USER_ADD: 'This email is associated with an inactive user',
+  USER_NOT_FOUND: 'User not found',
 
   // Archived
   archivedSection: {

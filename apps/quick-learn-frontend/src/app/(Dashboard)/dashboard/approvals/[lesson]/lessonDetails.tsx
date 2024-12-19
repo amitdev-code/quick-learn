@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { RouteEnum } from '@src/constants/route.enum';
 import {
-  approveLesson,
+  APPROVED_LESSON,
   getLessonDetails,
 } from '@src/apiServices/lessonsService';
 import { FullPageLoader } from '@src/shared/components/UIElements';
@@ -62,7 +62,7 @@ const LessonDetails = () => {
     if (isApproved) return;
     setIsApproved(value);
     setLoading(true);
-    approveLesson(id)
+    APPROVED_LESSON(id)
       .then((res) => showApiMessageInToast(res))
       .catch((err) => showApiErrorInToast(err))
       .finally(() => {

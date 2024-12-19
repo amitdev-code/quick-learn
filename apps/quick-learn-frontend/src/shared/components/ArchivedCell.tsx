@@ -63,8 +63,8 @@ const ArchivedCell: FC<Props> = ({
           <div className="flex items-center text-sm text-gray-500">
             <CalenderIcon />
             <p className="truncate ml-1.5">
-              {en.common.deactivatedOn}{' '}
-              {format(deactivationDate, DateFormats.shortDate)} {en.common.by}{' '}
+              {en.common.DEACTIVATED_ON}{' '}
+              {format(deactivationDate, DateFormats.shortDate)} {en.common.BY}{' '}
               <span className="max-w-[150px] inline-block truncate align-bottom">
                 {deactivatedBy}
               </span>
@@ -78,14 +78,14 @@ const ArchivedCell: FC<Props> = ({
           onClick={onClickRestore}
           disabled={isLoading}
         >
-          {!alternateButton ? en.common.restore : en.common.activate}
+          {!alternateButton ? en.common.RESTORE : en.common.ACTIVATE}
         </button>
         <button
           className="text-sm text-gray-500 hover:text-red-600 hover:underline ml-4"
           onClick={onClickDelete}
           disabled={isLoading}
         >
-          {en.common.delete}
+          {en.common.DELETE}
         </button>
       </div>
     </div>

@@ -28,7 +28,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAllCourses,
-  updateRoadmap,
+  UPDATE_ROADMAP,
   selectRoadmapById,
 } from '@src/store/features/roadmapsSlice';
 import {
@@ -181,7 +181,7 @@ const CourseDetails = () => {
               c.id === +courseId ? updatedCourse : c,
             ),
           };
-          dispatch(updateRoadmap(updatedRoadmap));
+          dispatch(UPDATE_ROADMAP(updatedRoadmap));
         }
 
         showApiMessageInToast(res);
@@ -237,7 +237,7 @@ const CourseDetails = () => {
             ...roadmapFromStore,
             courses: roadmapFromStore.courses.filter((c) => c.id !== +courseId),
           };
-          dispatch(updateRoadmap(updatedRoadmap));
+          dispatch(UPDATE_ROADMAP(updatedRoadmap));
         }
 
         router.push(RouteEnum.CONTENT);
@@ -337,7 +337,7 @@ const CourseDetails = () => {
               </button>
             </Tooltip>
 
-            <Tooltip content={en.contentRepository.archiveCourse}>
+            <Tooltip content={en.contentRepository.ARCHIVE_COURSE}>
               <button
                 type="button"
                 className="text-black bg-gray-300 hover:bg-red-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"

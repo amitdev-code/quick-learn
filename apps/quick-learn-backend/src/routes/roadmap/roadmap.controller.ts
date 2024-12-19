@@ -35,7 +35,7 @@ export class RoadmapController {
   @ApiOperation({ summary: 'Get all roadmaps' })
   async getRoadmap() {
     const roadmaps = await this.service.getAllRoadmaps();
-    return new SuccessResponse(en.GetAllRoapmaps, roadmaps);
+    return new SuccessResponse(en.GET_ALL_ROADMAPS, roadmaps);
   }
 
   @Post()
@@ -45,7 +45,7 @@ export class RoadmapController {
     @CurrentUser() user: UserEntity,
   ) {
     const roadmap = await this.service.createRoadmap(createRoadmapDto, user);
-    return new SuccessResponse(en.CreateRoadmap, roadmap);
+    return new SuccessResponse(en.CREATE_ROADMAP, roadmap);
   }
 
   @Post('archived')
@@ -55,7 +55,7 @@ export class RoadmapController {
     @Body() paginationDto: PaginationDto,
   ) {
     const roadmaps = await this.service.findAllArchived(paginationDto);
-    return new SuccessResponse(en.GetAllRoapmaps, roadmaps);
+    return new SuccessResponse(en.GET_ALL_ROADMAPS, roadmaps);
   }
 
   @Post('activate')
@@ -65,12 +65,12 @@ export class RoadmapController {
     @CurrentUser('id') userID: number,
   ): Promise<SuccessResponse> {
     const { active, id } = activateRoadmapDto;
-    const updatedRoadmap = await this.service.updateRoadmap(
+    const updatedRoadmap = await this.service.UPDATE_ROADMAP(
       id,
       { active },
       userID,
     );
-    return new SuccessResponse(en.RoadmapStatusUpdated, updatedRoadmap);
+    return new SuccessResponse(en.ROADMAP_STATUS_UPDATED, updatedRoadmap);
   }
 
   @Get(':id')
@@ -85,23 +85,23 @@ export class RoadmapController {
         +id,
         courseId ? +courseId : undefined,
       );
-    return new SuccessResponse(en.GetAllRoapmaps, roadmaps);
+    return new SuccessResponse(en.GET_ALL_ROADMAPS, roadmaps);
   }
 
   @Patch(':id')
   @ApiParam({ name: 'id', description: 'Roadmap ID', required: true })
   @ApiOperation({ summary: 'Update a roadmap' })
-  async updateRoadmap(
+  async UPDATE_ROADMAP(
     @Param('id') id: string,
     @Body() updateRoadmapDto: UpdateRoadmapDto,
     @CurrentUser('id') userID: number,
   ) {
-    const roadmap = await this.service.updateRoadmap(
+    const roadmap = await this.service.UPDATE_ROADMAP(
       +id,
       updateRoadmapDto,
       userID,
     );
-    return new SuccessResponse(en.updateRoadmap, roadmap);
+    return new SuccessResponse(en.UPDATE_ROADMAP, roadmap);
   }
 
   @Patch(':id/assign')
@@ -112,7 +112,7 @@ export class RoadmapController {
     @Body() assignCoursesToRoadmapDto: AssignCoursesToRoadmapDto,
   ) {
     await this.service.assignRoadmap(+id, assignCoursesToRoadmapDto);
-    return new SuccessResponse(en.RoadmapCoursesAssigned);
+    return new SuccessResponse(en.ROADMAP_COURSES_ASSIGNED);
   }
 
   @Delete(':id')
@@ -120,6 +120,6 @@ export class RoadmapController {
   @ApiOperation({ summary: 'Permanently delete roadmap' })
   async deleteRoadmap(@Param('id') id: string) {
     await this.service.delete({ id: +id });
-    return new SuccessResponse(en.successDeleteRoadmap);
+    return new SuccessResponse(en.SUCCESSFULLY_DELETED_ROADMAP);
   }
 }

@@ -38,7 +38,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Metadata for the add/update user(s).' })
   async metadata(@CurrentUser() user: UserEntity): Promise<SuccessResponse> {
     const metadata = await this.usersService.getMetadata(user);
-    return new SuccessResponse(en.successUserMetadata, metadata);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCHED_USER_METADATA, metadata);
   }
 
   @Get('my-roadmaps')
@@ -57,7 +57,7 @@ export class UsersController {
       user.id,
       includeCourses,
     );
-    return new SuccessResponse(en.successGotUserRoadmaps, roadmaps);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCHED_USER_ROADMAP, roadmaps);
   }
 
   @Get('my-roadmaps/:id/:userId?')
@@ -85,7 +85,7 @@ export class UsersController {
       userId ? userId : user?.id,
       +id,
     );
-    return new SuccessResponse(en.successGotUserRoadmapDetail, roadmaps);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCHED_USER_ROADMAP_DETAIL, roadmaps);
   }
 
   @Get('myroadmaps/courses/:id/:userId?')
@@ -113,7 +113,7 @@ export class UsersController {
       +id,
       roadmapId ? +roadmapId : undefined,
     );
-    return new SuccessResponse(en.successGotUserRoadmapDetail, roadmaps);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCHED_USER_ROADMAP_DETAIL, roadmaps);
   }
 
   @Get('myroadmaps/lessons/:id/:userId?')
@@ -142,7 +142,7 @@ export class UsersController {
       +query.courseId,
       query.roadmapId ? +query.roadmapId : undefined,
     );
-    return new SuccessResponse(en.successGotUserRoadmapDetail, roadmaps);
+    return new SuccessResponse(en.SUCCESSFULLY_FETCHED_USER_ROADMAP_DETAIL, roadmaps);
   }
 
   @Get('search')
@@ -156,7 +156,7 @@ export class UsersController {
       query,
     );
 
-    return new SuccessResponse(en.searchResults, searchedQueryResult);
+    return new SuccessResponse(en.SEARCH_RESULTS, searchedQueryResult);
   }
 
   @Post()
@@ -169,7 +169,7 @@ export class UsersController {
       ...createUserDto,
       team_id: loggedInUser.team_id,
     });
-    return new SuccessResponse(en.successUserCreate, user);
+    return new SuccessResponse(en.SUCCESSFULLY_USER_CREATED, user);
   }
 
   @Post('list')
@@ -183,7 +183,7 @@ export class UsersController {
       ...filter,
       active: true,
     });
-    return new SuccessResponse(en.successGotUsers, users);
+    return new SuccessResponse(en.SUCCESSFULLY_GOT_USER, users);
   }
 
   @Post('archived')
@@ -202,7 +202,7 @@ export class UsersController {
       },
       ['updated_by'],
     );
-    return new SuccessResponse(en.successGotUsers, users);
+    return new SuccessResponse(en.SUCCESSFULLY_GOT_USER, users);
   }
 
   @Post('activate')
@@ -212,7 +212,7 @@ export class UsersController {
   ): Promise<SuccessResponse> {
     const { active, userId } = body;
     const updatedUser = await this.usersService.updateUser(userId, { active });
-    return new SuccessResponse(en.successUserStatusUpdate, updatedUser);
+    return new SuccessResponse(en.SUCCESSFULLY_UPDATED_USER_STATUS, updatedUser);
   }
 
   // This should come AFTER all the specific routes
@@ -239,7 +239,7 @@ export class UsersController {
       { id: userId },
       relations,
     );
-    return new SuccessResponse(en.successGotUser, user);
+    return new SuccessResponse(en.SUCCESSFULLY_GOT_USER_DETAILS, user);
   }
 
   @Patch(':userId')
@@ -258,7 +258,7 @@ export class UsersController {
       ...updateUserDto,
       updated_by: currentUser,
     });
-    return new SuccessResponse(en.successUserUpdate, user);
+    return new SuccessResponse(en.SUCCESSFULLY_USER_UPDATED, user);
   }
 
   @Patch(':userId/assign-roadmaps')
@@ -273,7 +273,7 @@ export class UsersController {
     @Body() assignRoadmapsToUserDto: AssignRoadmapsToUserDto,
   ): Promise<SuccessResponse> {
     await this.usersService.assignRoadmaps(userId, assignRoadmapsToUserDto);
-    return new SuccessResponse(en.successUserUpdated);
+    return new SuccessResponse(en.SUCCESSFULLY_USER_UPDATED);
   }
 
   @Delete(':userId')
@@ -285,6 +285,6 @@ export class UsersController {
   })
   async remove(@Param('userId') userId: number) {
     await this.usersService.delete({ id: userId });
-    return new SuccessResponse(en.successUserDelete);
+    return new SuccessResponse(en.SUCCESSFULLY_USER_DELETED);
   }
 }

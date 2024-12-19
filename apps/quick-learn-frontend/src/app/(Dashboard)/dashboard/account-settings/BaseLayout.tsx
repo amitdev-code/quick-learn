@@ -154,7 +154,7 @@ const BaseLayout = ({
                   {tableColumnName}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  {en.common.action}
+                  {en.common.ACTION}
                 </th>
               </tr>
             </thead>
@@ -212,14 +212,14 @@ const BaseLayout = ({
                         className="font-medium text-blue-600 hover:underline"
                         onClick={() => onEditClick(index)}
                       >
-                        {en.common.edit}
+                        {en.common.EDIT}
                       </button>
                       <button
                         type="button"
                         className="ml-2 font-medium text-red-600 hover:underline"
                         onClick={() => onDelete(item.id as number)}
                       >
-                        {en.common.delete}
+                        {en.common.DELETE}
                       </button>
                     </td>
                   </tr>

@@ -13,7 +13,7 @@ import {
   UserLessonProgress,
 } from '@src/shared/types/LessonProgressTypes';
 
-export const getArchivedLessons = async (): Promise<
+export const FETCH_ARCHIVE_LESSONS = async (): Promise<
   AxiosSuccessResponse<TLesson[]>
 > => {
   const response = await axiosInstance.get<AxiosSuccessResponse<TLesson[]>>(
@@ -41,7 +41,7 @@ export const getLessonDetails = async (
   return response.data;
 };
 
-export const approveLesson = async (
+export const APPROVED_LESSON = async (
   id: string,
 ): Promise<AxiosSuccessResponse> => {
   const response = await axiosInstance.patch<AxiosSuccessResponse>(
@@ -50,7 +50,7 @@ export const approveLesson = async (
   return response.data;
 };
 
-export const updateLesson = async (
+export const UPDATE_LESSON = async (
   id: string,
   data: Partial<TLesson>,
 ): Promise<AxiosSuccessResponse<TLesson>> => {

@@ -4,13 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { activateLesson } from '@src/apiServices/archivedService';
 import { AxiosErrorObject } from '@src/apiServices/axios';
 import {
-  createLesson,
+  CREATE_LESSONS,
   getCourse,
   getRoadmap,
 } from '@src/apiServices/contentRepositoryService';
 import {
   getLessonDetails,
-  updateLesson,
+  UPDATE_LESSON,
 } from '@src/apiServices/lessonsService';
 import { en } from '@src/constants/lang/en';
 import { RouteEnum } from '@src/constants/route.enum';
@@ -42,7 +42,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
   selectRoadmapById,
-  updateRoadmap,
+  UPDATE_ROADMAP,
 } from '@src/store/features/roadmapsSlice';
 import { store } from '@src/store/store';
 
@@ -70,7 +70,7 @@ const SaveButton = memo(
       disabled={disabled}
     >
       {isAdmin
-        ? en.common.saveAndPublish
+        ? en.common.SAVE_AND_PUBLISH
         : en.common.lessonSaveAndApprovalButton}
     </button>
   ),
@@ -83,7 +83,7 @@ const ArchiveButton = memo(({ onClick }: { onClick: () => void }) => (
     className="fixed bottom-4 left-4 rounded-full bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:bg-gray-500"
     onClick={onClick}
   >
-    {en.common.Archive}
+    {en.common.ARCHIVE}
   </button>
 ));
 
@@ -215,7 +215,7 @@ const Lesson = () => {
       try {
         if (lessonId === 'add') {
           setIsEditing(false);
-          const res = await createLesson({
+          const res = await CREATE_LESSONS({
             ...data,
             course_id: courseId,
           });
@@ -230,7 +230,7 @@ const Lesson = () => {
           );
           if (roadmapFromStore) {
             dispatch(
-              updateRoadmap({
+              UPDATE_ROADMAP({
                 ...roadmapFromStore,
                 courses: roadmapFromStore.courses.map((c) =>
                   c.id === parseInt(courseId) ? courseRes.data : c,
@@ -242,7 +242,7 @@ const Lesson = () => {
           showApiMessageInToast(res);
           router.push(`${RouteEnum.CONTENT}/${roadmapId}/${courseId}`);
         } else {
-          const res = await updateLesson(lessonId, {
+          const res = await UPDATE_LESSON(lessonId, {
             content: data.content,
             name: data.name.trim().slice(0, 80),
           });
@@ -265,7 +265,7 @@ const Lesson = () => {
 
       try {
         setIsUpdating(true);
-        const res = await updateLesson(lessonId, {
+        const res = await UPDATE_LESSON(lessonId, {
           [field]: value.trim(),
         });
         if (!res.success) throw res;

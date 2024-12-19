@@ -60,7 +60,7 @@ const roadmapsSlice = createSlice({
       state.courses = sortByName(state.courses);
     },
 
-    updateRoadmap: (state, action: PayloadAction<TRoadmap>) => {
+    UPDATE_ROADMAP: (state, action: PayloadAction<TRoadmap>) => {
       const index = state.roadmaps.findIndex((r) => r.id === action.payload.id);
       if (index !== -1) {
         state.roadmaps[index] = action.payload;
@@ -131,7 +131,7 @@ const roadmapsSlice = createSlice({
   },
 });
 
-export const { addRoadmap, updateRoadmap, removeRoadmap } =
+export const { addRoadmap, UPDATE_ROADMAP, removeRoadmap } =
   roadmapsSlice.actions;
 
 // Selectors

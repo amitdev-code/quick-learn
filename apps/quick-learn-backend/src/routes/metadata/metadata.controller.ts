@@ -18,6 +18,6 @@ export class MetadataController {
   @ApiOperation({ summary: 'Get content repository metadata' })
   async getAllRoadmaps() {
     const metadata = await this.service.getContentRepositoryMetadata();
-    return new SuccessResponse(en.GetContentRepositoryMetadata, metadata);
+    return new SuccessResponse(en.FETCH_CONTENTREPO_METADATA, metadata);
   }
 }

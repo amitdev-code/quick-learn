@@ -31,11 +31,11 @@ export class LessonService extends PaginationService<LessonEntity> {
    * @throws BadRequestException if the course doesn't exist
    * @returns The created lesson entity
    */
-  async createLesson(user: UserEntity, payload: CreateLessonDto) {
+  async CREATE_LESSONS(user: UserEntity, payload: CreateLessonDto) {
     const course = await this.courseService.get({ id: +payload.course_id });
 
     if (!course) {
-      throw new BadRequestException(en.invalidCourse);
+      throw new BadRequestException(en.INVALID_COURSE);
     }
 
     let lesson: Partial<LessonEntity> = Object.assign(new LessonEntity(), {
@@ -71,7 +71,7 @@ export class LessonService extends PaginationService<LessonEntity> {
    * @throws BadRequestException if the lesson doesn't exist
    * @returns nothing
    */
-  async updateLesson(
+  async UPDATE_LESSON(
     user: UserEntity,
     id: LessonEntity['id'],
     updateLessonDto: UpdateLessonDto,
@@ -79,7 +79,7 @@ export class LessonService extends PaginationService<LessonEntity> {
     const lesson = await this.get({ id });
 
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
 
     // GET ALL IMAGE URL USED IN EXISTING LESSION CONTENT
@@ -136,10 +136,10 @@ export class LessonService extends PaginationService<LessonEntity> {
    * @throws BadRequestException if the lesson doesn't exist
    * @returns nothing
    */
-  async approveLesson(lessonId: LessonEntity['id'], userId: UserEntity['id']) {
+  async APPROVED_LESSON(lessonId: LessonEntity['id'], userId: UserEntity['id']) {
     const lesson = await this.get({ id: lessonId });
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
     await this.update(
       { id: lessonId },
@@ -158,7 +158,7 @@ export class LessonService extends PaginationService<LessonEntity> {
    * @param relations - Relations to include in the query
    * @returns Paginated list of archived lessons
    */
-  async getArchivedLessons(
+  async FETCH_ARCHIVE_LESSONS(
     paginationDto: PaginationDto,
     relations: string[] = [],
   ): Promise<PaginatedResult<LessonEntity>> {
@@ -202,10 +202,10 @@ export class LessonService extends PaginationService<LessonEntity> {
    * @param userId - The id of the user unarchiving the lesson
    * @throws BadRequestException if the lesson doesn't exist
    */
-  async unarchiveLesson(lessonId: LessonEntity['id']) {
+  async UNARCHIVE_LESSON(lessonId: LessonEntity['id']) {
     const lesson = await this.get({ id: lessonId });
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
 
     await this.update(
@@ -217,10 +217,10 @@ export class LessonService extends PaginationService<LessonEntity> {
     );
   }
 
-  async archiveLesson(userId: UserEntity['id'], lessonId: LessonEntity['id']) {
+  async ARCHIVE_LESSON(userId: UserEntity['id'], lessonId: LessonEntity['id']) {
     const lesson = await this.get({ id: lessonId });
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
 
     await this.update(
@@ -241,7 +241,7 @@ export class LessonService extends PaginationService<LessonEntity> {
     const lesson = await this.get({ id });
 
     if (!lesson) {
-      throw new BadRequestException(en.lessonNotFound);
+      throw new BadRequestException(en.LESSON_NOT_FOUND);
     }
 
     // GET ALL IMAGE URL USED IN EXISTING LESSION CONTENT
@@ -317,7 +317,7 @@ export class LessonService extends PaginationService<LessonEntity> {
   ) {
     // VALIDATE TOKEN
     if (!token) {
-      throw new BadRequestException(en.lessonTokenRequired);
+      throw new BadRequestException(en.LESSON_TOKEN_REQUIRED);
     }
 
     const tokenEntity = await this.LessonTokenRepository.createQueryBuilder(
@@ -330,17 +330,17 @@ export class LessonService extends PaginationService<LessonEntity> {
       .getOne();
 
     if (!tokenEntity) {
-      throw new BadRequestException(en.invalidLessonToken);
+      throw new BadRequestException(en.INVALID_LESSON_TOKEN);
     }
 
     // CHECK IF TOKEN IS VALID
     if (token !== tokenEntity.token) {
-      throw new BadRequestException(en.invalidLessonToken);
+      throw new BadRequestException(en.INVALID_LESSON_TOKEN);
     }
 
     // CHECK IF TOKEN HAS EXPIRED
     if (tokenEntity.expiresAt < new Date()) {
-      throw new BadRequestException(en.lessonTokenExpired);
+      throw new BadRequestException(en.LESSON_TOKEN_EXPIRED);
     }
 
     return tokenEntity;

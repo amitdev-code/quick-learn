@@ -169,7 +169,7 @@ export const deleteLesson = async (
 /**
  * Get archived lessons with pagination
  */
-export const getArchivedLessons = async (
+export const FETCH_ARCHIVE_LESSONS = async (
   page: number,
   q = '',
 ): Promise<AxiosSuccessResponse<PaginateWrapper<TLesson[]>>> => {

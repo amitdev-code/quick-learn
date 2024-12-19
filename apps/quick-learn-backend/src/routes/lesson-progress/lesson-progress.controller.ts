@@ -55,12 +55,12 @@ export class LessonProgressController {
       dto.courseId,
     );
     if (dto.isCompleted) {
-      return new SuccessResponse(en.successfullyCompletedLesson, {
+      return new SuccessResponse(en.SUCCESSFULLY_COMPLETED_LESSON, {
         isRead: !!response,
         completed_date: response.completed_date,
       });
     } else {
-      return new SuccessResponse(en.lessonMarkedUnRead);
+      return new SuccessResponse(en.LESSON_MARKED_UNREAD);
     }
   }
 
@@ -70,7 +70,7 @@ export class LessonProgressController {
       req.user.id,
       courseId,
     );
-    return new SuccessResponse(en.courseCompletedLessons, data);
+    return new SuccessResponse(en.COURSE_COMPLETED_LESSON, data);
   }
 
   @Get('/userprogress/:userID?')
@@ -82,7 +82,7 @@ export class LessonProgressController {
       await this.lessonProgressService.getUserLessonProgressViaCourse(
         userID ? userID : curentUser.id,
       );
-    return new SuccessResponse(en.userProgressGrouped, data);
+    return new SuccessResponse(en.USER_PROGRESS_GROUPED_BY_COURSE, data);
   }
 
   @ApiParam({
@@ -96,7 +96,7 @@ export class LessonProgressController {
     const data = await this.lessonProgressService.getDailyLessonProgress(
       userID,
     );
-    return new SuccessResponse(en.allDailyLessons, data);
+    return new SuccessResponse(en.ALL_DAILY_LESSONS, data);
   }
 
   @Get('check/:lessonId/:userId?')
@@ -122,6 +122,6 @@ export class LessonProgressController {
       currentUserViewed,
       lessonId,
     );
-    return new SuccessResponse(en.lessonStatus, data);
+    return new SuccessResponse(en.LESSON_STATUS, data);
   }
 }
