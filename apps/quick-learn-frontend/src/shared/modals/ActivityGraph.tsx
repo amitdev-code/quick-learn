@@ -183,8 +183,6 @@ const ActivityGraph: React.FC<props> = (props) => {
     }
   }, [props.userDailyProgressData, props.userProgressData]);
 
-  console.log(userActivityList, 'userActivityList');
-
   return (
     <Fragment>
       <Modal show={props.isOpen} size="4xl">
